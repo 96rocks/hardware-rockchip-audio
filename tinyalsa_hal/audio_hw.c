@@ -626,6 +626,10 @@ static int start_output_stream(struct stream_out *out)
 #endif
     out_dump(out, 0);
 #endif
+    if((PCM_CARD == 0) && (PCM_CARD != PCM_CARD_HDMI)) {
+        ALOGD("%s", "force set speaker out");
+        out->device |= AUDIO_DEVICE_OUT_SPEAKER;
+    }
     connect_hdmi = true;
     route_pcm_open(getRouteFromDevice(out->device));
 
